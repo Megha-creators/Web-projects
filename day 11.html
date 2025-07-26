@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Day 11 - To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    input {
+      padding: 10px;
+      width: 200px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      padding: 10px;
+      background: #f4f4f4;
+      margin: 5px auto;
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .delete-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>To-Do List</h1>
+
+  <input type="text" id="taskInput" placeholder="Enter a task">
+  <button onclick="addTask()">Add</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    function addTask() {
+      const taskText = document.getElementById("taskInput").value;
+
+      if (taskText === "") {
+        alert("Please enter a task");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${taskText}
+        <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+      `;
+
+      document.getElementById("taskList").appendChild(li);
+      document.getElementById("taskInput").value = "";
+    }
+  </script>
+
+</body>
+</html>
