@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Slider</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f2f2f2;
+    }
+
+    img {
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Image Slider</h1>
+  <img id="slider" src="https://picsum.photos/id/1011/300/200" alt="Image" />
+
+  <div class="buttons">
+    <button onclick="prevImage()">Previous</button>
+    <button onclick="nextImage()">Next</button>
+  </div>
+
+  <script>
+    const images = [
+      "https://picsum.photos/id/1011/300/200",
+      "https://picsum.photos/id/1025/300/200",
+      "https://picsum.photos/id/1043/300/200",
+      "https://picsum.photos/id/1062/300/200"
+    ];
+
+    let index = 0;
+
+    function showImage() {
+      document.getElementById("slider").src = images[index];
+    }
+
+    function nextImage() {
+      index = (index + 1) % images.length;
+      showImage();
+    }
+
+    function prevImage() {
+      index = (index - 1 + images.length) % images.length;
+      showImage();
+    }
+  </script>
+
+</body>
+</html>
