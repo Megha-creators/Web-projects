@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 23 - Image Slider</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="slider">
+    <div class="slides">
+      <!-- Slide 1 -->
+      <img src="https://via.placeholder.com/600x300?text=Slide+1" class="slide" />
+      <!-- Slide 2 -->
+      <img src="https://via.placeholder.com/600x300?text=Slide+2" class="slide" />
+      <!-- Slide 3 -->
+      <img src="https://via.placeholder.com/600x300?text=Slide+3" class="slide" />
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">❮</button>
+    <button class="next" onclick="moveSlide(1)">❯</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  background: #f0f0f0;
+}
+
+.slider {
+  position: relative;
+  width: 600px;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  width: 600px;
+  flex-shrink: 0;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+let index = 0;
+
+function showSlide(n) {
+  const slides = document.querySelector('.slides');
+  const totalSlides = document.querySelectorAll('.slide').length;
+  
+  index = (n + totalSlides) % totalSlides;
+  slides.style.transform = `translateX(${-600 * index}px)`;
+}
+
+function moveSlide(step) {
+  showSlide(index + step);
+}
+
+// Optional: Auto Slide
+setInterval(() => {
+  moveSlide(1);
+}, 3000);
+
+// Initial slide
+showSlide(index);
