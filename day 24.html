@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 24 - Notes App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+
+    .note-container {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .note {
+      background-color: #fff;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .note button {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 Notes App</h1>
+  <div class="note-container">
+    <input type="text" id="noteInput" placeholder="Type your note here">
+    <button onclick="addNote()">Add Note</button>
+
+    <div id="notesList"></div>
+  </div>
+
+  <script>
+    function addNote() {
+      const noteText = document.getElementById("noteInput").value;
+      if (noteText.trim() === "") {
+        alert("Please enter a note.");
+        return;
+      }
+
+      const noteDiv = document.createElement("div");
+      noteDiv.className = "note";
+
+      const noteContent = document.createElement("span");
+      noteContent.innerText = noteText;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.innerText = "Delete";
+      deleteBtn.onclick = function() {
+        noteDiv.remove();
+      };
+
+      noteDiv.appendChild(noteContent);
+      noteDiv.appendChild(deleteBtn);
+
+      document.getElementById("notesList").appendChild(noteDiv);
+      document.getElementById("noteInput").value = ""; // Clear input
+    }
+  </script>
+
+</body>
+</html>
