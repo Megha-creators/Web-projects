@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Day 7 - Quiz App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Day 7: Simple Quiz App</h1>
+
+  <div class="question">
+    <label>1. What is the full form of HTML?</label><br>
+    <input type="text" id="q1" placeholder="Your answer">
+  </div>
+
+  <div class="question">
+    <label>2. What does CSS stand for?</label><br>
+    <input type="text" id="q2" placeholder="Your answer">
+  </div>
+
+  <div class="question">
+    <label>3. Which tag is used for JavaScript?</label><br>
+    <input type="text" id="q3" placeholder="Your answer">
+  </div>
+
+  <button onclick="checkAnswers()">Submit</button>
+
+  <div id="result"></div>
+
+  <script>
+    function checkAnswers() {
+      let score = 0;
+
+      const a1 = document.getElementById("q1").value.toLowerCase();
+      const a2 = document.getElementById("q2").value.toLowerCase();
+      const a3 = document.getElementById("q3").value.toLowerCase();
+
+      if (a1 === "hyper text markup language") score++;
+      if (a2 === "cascading style sheets") score++;
+      if (a3 === "script" || a3 === "script tag" || a3 === "<script>") score++;
+
+      document.getElementById("result").textContent = `You scored ${score}/3`;
+    }
+  </script>
+</body>
+</html>
