@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 25 - Quiz App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f3f3f3;
+    }
+
+    .quiz-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #score {
+      font-size: 22px;
+      color: green;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <div class="question" id="question">Question goes here</div>
+
+    <div class="options">
+      <div class="option"><input type="radio" name="option" value="0"> <span id="opt0"></span></div>
+      <div class="option"><input type="radio" name="option" value="1"> <span id="opt1"></span></div>
+      <div class="option"><input type="radio" name="option" value="2"> <span id="opt2"></span></div>
+      <div class="option"><input type="radio" name="option" value="3"> <span id="opt3"></span></div>
+    </div>
+
+    <button onclick="nextQuestion()">Next</button>
+    <div id="score"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What does HTML stand for?",
+        options: ["Hyper Text Makeup Language", "Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language"],
+        correct: 1
+      },
+      {
+        question: "Which language is used for styling web pages?",
+        options: ["HTML", "jQuery", "CSS", "XML"],
+        correct: 2
+      },
+      {
+        question: "Which is not a JavaScript framework?",
+        options: ["Python Script", "Angular", "React", "Vue"],
+        correct: 0
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const q = quizData[current];
+      document.getElementById("question").textContent = q.question;
+      q.options.forEach((opt, i) => {
+        document.getElementById("opt" + i).textContent = opt;
+        document.querySelectorAll('input[name="option"]')[i].checked = false;
+      });
+    }
+
+    function nextQuestion() {
+      const selected = document.querySelector('input[name="option"]:checked');
+      if (!selected) {
+        alert("Please select an answer.");
+        return;
+      }
+
+      const answer = parseInt(selected.value);
+      if (answer === quizData[current].correct) {
+        score++;
+      }
+
+      current++;
+
+      if (current < quizData.length) {
+        loadQuestion();
+      } else {
+        document.querySelector(".quiz-container").innerHTML = `<h2>Quiz Completed!</h2><div id="score">Your score: ${score} / ${quizData.length}</div>`;
+      }
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>
